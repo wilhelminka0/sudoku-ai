@@ -1,20 +1,9 @@
-services:
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_USER: alesko
-      POSTGRES_PASSWORD: a
-      POSTGRES_DB: sudokudb
-    ports:
-      - "5432:5432"
 
+services:
   app:
     build: .
     ports:
       - "5000:5000"
     environment:
-      DATABASE_URL: "postgresql://alesko:a@db:5432/sudokudb"
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       OPENAI_BASE_URL: ${OPENAI_BASE_URL}
-    depends_on:
-      - db
