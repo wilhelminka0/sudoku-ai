@@ -1,0 +1,21 @@
+services:
+  app:
+    build: .
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL}
+      - DATABASE_URL=postgresql://alesko:heslo123@db:5432/sudokudb
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=alesko
+      - POSTGRES_PASSWORD=heslo123
+      - POSTGRES_DB=sudokudb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
