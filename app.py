@@ -2,10 +2,15 @@ import os, requests, sqlite3
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
-DB_PATH = '/tmp/stats_vlasak.db'
+# ZMĚNA: Cesta upravena na /data/ podle požadavků v zadání
+DB_PATH = '/data/vlasak.db'
 
 def init_db():
     try:
+        # Kontrola, zda složka /data existuje, pokud ne, vytvoříme ji
+        if not os.path.exists('/data'):
+            os.makedirs('/data')
+            
         with sqlite3.connect(DB_PATH) as conn:
             conn.execute('CREATE TABLE IF NOT EXISTS logs (id INTEGER PRIMARY KEY, count INTEGER)')
             if not conn.execute('SELECT count FROM logs WHERE id = 1').fetchone():
