@@ -10,7 +10,7 @@ def init_db():
         # Kontrola, zda složka /data existuje, pokud ne, vytvoříme ji
         if not os.path.exists('/data'):
             os.makedirs('/data')
-            
+            # Kontrola 
         with sqlite3.connect(DB_PATH) as conn:
             conn.execute('CREATE TABLE IF NOT EXISTS logs (id INTEGER PRIMARY KEY, count INTEGER)')
             if not conn.execute('SELECT count FROM logs WHERE id = 1').fetchone():
