@@ -31,7 +31,7 @@ def index():
 
 @app.route('/ask', methods=['POST'])
 def ask_ai():
-    # 1. Zápis do statistik
+    # 1. Zápis do databaze
     try:
         with sqlite3.connect(DB_PATH) as conn:
             conn.execute('UPDATE logs SET count = count + 1 WHERE id = 1')
